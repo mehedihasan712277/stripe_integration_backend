@@ -1,5 +1,7 @@
 import { prisma } from "../../lib/prisma";
 import { TCreateOrderPayload } from "./order.interface";
+import config from "../../config";
+import { stripe } from "../../lib/stripe";
 
 const createOrderIntoDB = async (
     payload: TCreateOrderPayload,
@@ -29,7 +31,39 @@ const createOrderIntoDB = async (
         },
     });
 
-    return result;
+    // return result;
+    // stripe-----------------------------------------
+    const line_items = payload.items.map((item) => ({
+        quantity: item.quantity,
+
+        price_data: {
+            currency: "usd",
+
+            unit_amount: item.price * 100,
+
+            product_data: {
+                name: item.name,
+                images: item.images,
+                description: item.description,
+            },
+        },
+    }));
+
+    const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+
+        line_items,
+
+        success_url: `${config.client_url}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+
+        cancel_url: `${config.client_url}/cart`,
+    });
+
+    return {
+        result,
+        id: session.id,
+        url: session.url,
+    };
 };
 
 const getOrdersFromDB = async () => {
