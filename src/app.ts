@@ -7,6 +7,7 @@ import { globalErrorHandler } from "./middleware/globalErrorHandler";
 import config from "./config";
 import { authRoutes } from "./models/auth/auth.routes";
 import { paymentRoutes } from "./models/payment/payment.route";
+import { orderRoutes } from "./models/order/order.routes";
 
 // -----------routes import---------
 
@@ -175,6 +176,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/checkout", paymentRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use(notFound);
 app.use(globalErrorHandler);
