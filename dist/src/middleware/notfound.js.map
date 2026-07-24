@@ -1,0 +1,1 @@
+{"version":3,"file":"notfound.js","sourceRoot":"","sources":["../../../src/middleware/notfound.ts"],"names":[],"mappings":";;;AAEO,MAAM,QAAQ,GAAG,CAAC,GAAY,EAAE,GAAa,EAAE,EAAE;IACpD,GAAG,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC;QACjB,OAAO,EAAE,iBAAiB;QAC1B,IAAI,EAAE,GAAG,CAAC,WAAW;QACrB,IAAI,EAAE,IAAI,EAAE;KACf,CAAC,CAAC;AACP,CAAC,CAAC;AANW,QAAA,QAAQ,GAAR,QAAQ,CAMnB"}

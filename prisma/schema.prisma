@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ActiveStatus {
+  ACTIVE
+  BLOCKED
+}
+
+enum Role {
+  ADMIN
+  MODERATOR
+}
+
+enum OrderStatus {
+  UNPAID
+  PAID
+  CANCELED
+  FAILED
+}
+
+model User {
+  id        String       @id @default(cuid())
+  name      String
+  email     String       @unique
+  password  String
+  role      Role
+  status    ActiveStatus @default(ACTIVE)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  // Relations
+  profile  Profile?
+  products Product[]
+  orders   Order[]
+
+  @@map("users")
+}
+
+model Profile {
+  id String @id @default(uuid())
+
+  profilePhoto String?
+  bio          String?
+
+  // Relations
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+model Product {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  price       Float
+  thumbnail   String?
+  stock       Int     @default(0)
+  category    String?
+
+  // Optional seller relation — one user can list many products
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("products")
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  status          OrderStatus @default(UNPAID)
+  totalAmount     Float
+  stripeSessionId String?     @unique
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  items OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  productId Int // dummyjson product id (external catalog, not the local Product model)
+  title     String
+  price     Float
+  quantity  Int
+  image     String?
+
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
