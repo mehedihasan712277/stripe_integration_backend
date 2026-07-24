@@ -8,7 +8,7 @@
         "build": "prisma generate && tsc",
         "vercel-build": "prisma generate && tsc",
         "start": "node dist/src/server.js",
-        "stripe:webhook": "stripe listen --forward-to localhost:5000/api/checkout/webhook"
+        "stripe:webhook": "stripe listen --forward-to localhost:5000/api/webhook/stripe"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.6",

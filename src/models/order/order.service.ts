@@ -1,7 +1,6 @@
 import { prisma } from "../../lib/prisma";
+import { OrderStatus } from "../../../generated/prisma/enums";
 import { TCreateOrderPayload } from "./order.interface";
-import config from "../../config";
-import { stripe } from "../../lib/stripe";
 
 const createOrderIntoDB = async (
     payload: TCreateOrderPayload,
@@ -15,6 +14,7 @@ const createOrderIntoDB = async (
         data: {
             userId,
             totalAmount,
+            status: OrderStatus.UNPAID,
             items: {
                 create: payload.items.map((item) => ({
                     name: item.name,
@@ -31,39 +31,36 @@ const createOrderIntoDB = async (
         },
     });
 
-    // return result;
-    // stripe-----------------------------------------
-    const line_items = payload.items.map((item) => ({
-        quantity: item.quantity,
+    return result;
+};
 
-        price_data: {
-            currency: "usd",
-
-            unit_amount: item.price * 100,
-
-            product_data: {
-                name: item.name,
-                images: item.images,
-                description: item.description,
-            },
-        },
-    }));
-
-    const session = await stripe.checkout.sessions.create({
-        mode: "payment",
-
-        line_items,
-
-        success_url: `${config.client_url}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-
-        cancel_url: `${config.client_url}/cart`,
+// Called right after the Stripe session is created, so the webhook
+// can later look the order up by session id if metadata is ever missing.
+const attachStripeSessionId = async (
+    orderId: string,
+    stripeSessionId: string,
+) => {
+    return prisma.order.update({
+        where: { id: orderId },
+        data: { stripeSessionId },
     });
+};
 
-    return {
-        result,
-        id: session.id,
-        url: session.url,
-    };
+const updateOrderStatusById = async (orderId: string, status: OrderStatus) => {
+    return prisma.order.update({
+        where: { id: orderId },
+        data: { status },
+    });
+};
+
+const updateOrderStatusBySessionId = async (
+    stripeSessionId: string,
+    status: OrderStatus,
+) => {
+    return prisma.order.update({
+        where: { stripeSessionId },
+        data: { status },
+    });
 };
 
 const getOrdersFromDB = async () => {
@@ -80,5 +77,8 @@ const getOrdersFromDB = async () => {
 
 export const orderServices = {
     createOrderIntoDB,
+    attachStripeSessionId,
+    updateOrderStatusById,
+    updateOrderStatusBySessionId,
     getOrdersFromDB,
 };
