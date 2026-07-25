@@ -6,7 +6,6 @@ import { notFound } from "./middleware/notfound";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
 import config from "./config";
 import { authRoutes } from "./models/auth/auth.routes";
-import { paymentRoutes } from "./models/payment/payment.route";
 import { orderRoutes } from "./models/order/order.routes";
 import { checkoutRoutes } from "./models/checkout/checkout.routes";
 import { webhookRoutes } from "./models/checkout/webhook.routes";
@@ -179,7 +178,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/auth", authRoutes);
-// app.use("/api/checkout", paymentRoutes);
 app.use("/api/checkout", checkoutRoutes);
 app.use("/api/orders", orderRoutes);
 

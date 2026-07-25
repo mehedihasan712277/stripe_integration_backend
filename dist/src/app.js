@@ -173,7 +173,6 @@ app.get("/", (req, res) => {
 `);
 });
 app.use("/api/auth", auth_routes_1.authRoutes);
-// app.use("/api/checkout", paymentRoutes);
 app.use("/api/checkout", checkout_routes_1.checkoutRoutes);
 app.use("/api/orders", order_routes_1.orderRoutes);
 app.use(notfound_1.notFound);
