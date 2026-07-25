@@ -9,6 +9,7 @@ import { authRoutes } from "./models/auth/auth.routes";
 import { orderRoutes } from "./models/order/order.routes";
 import { checkoutRoutes } from "./models/checkout/checkout.routes";
 import { webhookRoutes } from "./models/checkout/webhook.routes";
+import { propertyRoutes } from "./models/property/property.routes";
 
 // -----------routes import---------
 
@@ -180,6 +181,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/checkout", checkoutRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/properties", propertyRoutes);
 
 app.use(notFound);
 app.use(globalErrorHandler);
