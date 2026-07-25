@@ -5,6 +5,6 @@ import { checkoutController } from "./checkout.controller";
 
 const router = Router();
 
-router.post("/", auth(Role.MODERATOR), checkoutController.createCheckout);
+router.post("/", auth(Role.USER), checkoutController.createCheckout);
 
 export const checkoutRoutes = router;
