@@ -3,7 +3,7 @@ import { prisma } from "../../lib/prisma";
 import { stripe } from "../../lib/stripe";
 import { TCreateProperty, TUpdateProperty } from "./property.interface";
 
-const craetePropertyIntoDb = async (
+const createPropertyIntoDb = async (
     payload: TCreateProperty,
     userId: string,
 ) => {
@@ -91,7 +91,7 @@ const deletePropertyFromDb = async (id: string) => {
 };
 
 export const propertyService = {
-    craetePropertyIntoDb,
+    createPropertyIntoDb,
     getAllPropertiesFromDb,
     getPropertyByIdFromDb,
     updatePropertyInDb,
