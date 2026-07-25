@@ -1,3 +1,4 @@
+import Stripe from "stripe";
 import { prisma } from "../../lib/prisma";
 import { stripe } from "../../lib/stripe";
 import { TCreateProperty, TUpdateProperty } from "./property.interface";
@@ -6,8 +7,7 @@ const craetePropertyIntoDb = async (
     payload: TCreateProperty,
     userId: string,
 ) => {
-    // 1. Save the property in Postgres first, so we always have a record
-    //    even if something goes wrong talking to Stripe.
+    // 1. Save the property in Postgres first.
     const property = await prisma.property.create({
         data: {
             name: payload.name,
@@ -16,37 +16,51 @@ const craetePropertyIntoDb = async (
             userId,
         },
     });
-    // console.log("Property created in DB:", property);
 
-    // 2. Create a Stripe product representing this property.
-    const product = await stripe.products.create({
-        name: property.name,
-        description: property.description ?? undefined,
-    });
+    let product: Stripe.Product | null = null;
 
-    // console.log("Stripe product created:", product);
-    // 3. Create a recurring monthly price for that product, based on rent.
-    const price = await stripe.prices.create({
-        unit_amount: Math.round(property.rentPrice * 100),
-        currency: "usd",
-        recurring: {
-            interval: "month",
-        },
-        product: product.id,
-    });
+    try {
+        // 2. Create a Stripe Product.
+        product = await stripe.products.create({
+            name: property.name,
+            description: property.description ?? undefined,
+        });
 
-    // console.log("Stripe price created:", price);
-    // 4. Persist the Stripe ids back onto the property so a later
-    //    subscription checkout can reference property.stripePriceId.
-    const updatedProperty = await prisma.property.update({
-        where: { id: property.id },
-        data: {
-            stripeProductId: product.id,
-            stripePriceId: price.id,
-        },
-    });
+        // 3. Create a recurring monthly Stripe Price.
+        const price = await stripe.prices.create({
+            unit_amount: Math.round(property.rentPrice * 100),
+            currency: "usd",
+            recurring: {
+                interval: "month",
+            },
+            product: product.id,
+        });
 
-    return updatedProperty;
+        // 4. Save Stripe IDs in the database.
+        const updatedProperty = await prisma.property.update({
+            where: { id: property.id },
+            data: {
+                stripeProductId: product.id,
+                stripePriceId: price.id,
+            },
+        });
+
+        return updatedProperty;
+    } catch (error) {
+        // If a Stripe Product was created, archive it.
+        if (product) {
+            await stripe.products.update(product.id, {
+                active: false,
+            });
+        }
+
+        // Remove the partially created property from the database.
+        await prisma.property.delete({
+            where: { id: property.id },
+        });
+
+        throw error;
+    }
 };
 
 const getAllPropertiesFromDb = async () => {
