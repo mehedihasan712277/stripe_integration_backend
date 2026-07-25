@@ -9,7 +9,7 @@
 * 🟢 You can import this file directly.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Role = exports.ActiveStatus = void 0;
+exports.OrderStatus = exports.Role = exports.ActiveStatus = void 0;
 exports.ActiveStatus = {
     ACTIVE: 'ACTIVE',
     BLOCKED: 'BLOCKED'
@@ -17,5 +17,11 @@ exports.ActiveStatus = {
 exports.Role = {
     ADMIN: 'ADMIN',
     MODERATOR: 'MODERATOR'
+};
+exports.OrderStatus = {
+    UNPAID: 'UNPAID',
+    PAID: 'PAID',
+    CANCELED: 'CANCELED',
+    FAILED: 'FAILED'
 };
 //# sourceMappingURL=enums.js.map

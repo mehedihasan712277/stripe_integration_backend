@@ -29,6 +29,8 @@ export declare const ModelName: {
     readonly User: 'User';
     readonly Profile: 'Profile';
     readonly Product: 'Product';
+    readonly Order: 'Order';
+    readonly OrderItem: 'OrderItem';
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export declare const TransactionIsolationLevel: {
@@ -60,13 +62,35 @@ export declare const ProfileScalarFieldEnum: {
 export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum];
 export declare const ProductScalarFieldEnum: {
     readonly id: 'id';
-    readonly profilePhoto: 'profilePhoto';
-    readonly bio: 'bio';
-    readonly userId: 'userId';
+    readonly name: 'name';
+    readonly description: 'description';
+    readonly price: 'price';
+    readonly images: 'images';
+    readonly quantity: 'quantity';
     readonly createdAt: 'createdAt';
     readonly updatedAt: 'updatedAt';
 };
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum];
+export declare const OrderScalarFieldEnum: {
+    readonly id: 'id';
+    readonly status: 'status';
+    readonly totalAmount: 'totalAmount';
+    readonly stripeSessionId: 'stripeSessionId';
+    readonly userId: 'userId';
+    readonly createdAt: 'createdAt';
+    readonly updatedAt: 'updatedAt';
+};
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
+export declare const OrderItemScalarFieldEnum: {
+    readonly id: 'id';
+    readonly name: 'name';
+    readonly description: 'description';
+    readonly price: 'price';
+    readonly images: 'images';
+    readonly quantity: 'quantity';
+    readonly orderId: 'orderId';
+};
+export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: 'asc';
     readonly desc: 'desc';

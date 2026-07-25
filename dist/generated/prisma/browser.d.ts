@@ -17,4 +17,14 @@ export type Profile = Prisma.ProfileModel;
  *
  */
 export type Product = Prisma.ProductModel;
+/**
+ * Model Order
+ *
+ */
+export type Order = Prisma.OrderModel;
+/**
+ * Model OrderItem
+ *
+ */
+export type OrderItem = Prisma.OrderItemModel;
 //# sourceMappingURL=browser.d.ts.map

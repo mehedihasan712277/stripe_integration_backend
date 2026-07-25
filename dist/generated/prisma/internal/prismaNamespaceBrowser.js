@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.ProductScalarFieldEnum = exports.ProfileScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.OrderItemScalarFieldEnum = exports.OrderScalarFieldEnum = exports.ProductScalarFieldEnum = exports.ProfileScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -77,7 +77,9 @@ exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
     User: 'User',
     Profile: 'Profile',
-    Product: 'Product'
+    Product: 'Product',
+    Order: 'Order',
+    OrderItem: 'OrderItem'
 };
 /*
  * Enums
@@ -108,11 +110,31 @@ exports.ProfileScalarFieldEnum = {
 };
 exports.ProductScalarFieldEnum = {
     id: 'id',
-    profilePhoto: 'profilePhoto',
-    bio: 'bio',
+    name: 'name',
+    description: 'description',
+    price: 'price',
+    images: 'images',
+    quantity: 'quantity',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.OrderScalarFieldEnum = {
+    id: 'id',
+    status: 'status',
+    totalAmount: 'totalAmount',
+    stripeSessionId: 'stripeSessionId',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+exports.OrderItemScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    price: 'price',
+    images: 'images',
+    quantity: 'quantity',
+    orderId: 'orderId'
 };
 exports.SortOrder = {
     asc: 'asc',

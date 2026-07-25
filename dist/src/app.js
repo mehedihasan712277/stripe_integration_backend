@@ -10,12 +10,16 @@ const notfound_1 = require("./middleware/notfound");
 const globalErrorHandler_1 = require("./middleware/globalErrorHandler");
 const config_1 = __importDefault(require("./config"));
 const auth_routes_1 = require("./models/auth/auth.routes");
+const order_routes_1 = require("./models/order/order.routes");
+const checkout_routes_1 = require("./models/checkout/checkout.routes");
+const webhook_routes_1 = require("./models/checkout/webhook.routes");
 // -----------routes import---------
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: config_1.default.app_url,
+    origin: config_1.default.client_url,
     credentials: true,
 }));
+app.use("/api/webhook", webhook_routes_1.webhookRoutes); // must come before express.json()
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
@@ -169,6 +173,9 @@ app.get("/", (req, res) => {
 `);
 });
 app.use("/api/auth", auth_routes_1.authRoutes);
+// app.use("/api/checkout", paymentRoutes);
+app.use("/api/checkout", checkout_routes_1.checkoutRoutes);
+app.use("/api/orders", order_routes_1.orderRoutes);
 app.use(notfound_1.notFound);
 app.use(globalErrorHandler_1.globalErrorHandler);
 exports.default = app;
