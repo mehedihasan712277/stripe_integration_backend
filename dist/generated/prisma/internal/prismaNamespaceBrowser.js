@@ -142,6 +142,8 @@ exports.PropertyScalarFieldEnum = {
     name: 'name',
     description: 'description',
     rentPrice: 'rentPrice',
+    stripeProductId: 'stripeProductId',
+    stripePriceId: 'stripePriceId',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'

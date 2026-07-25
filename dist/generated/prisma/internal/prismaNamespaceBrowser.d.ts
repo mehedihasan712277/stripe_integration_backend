@@ -97,6 +97,8 @@ export declare const PropertyScalarFieldEnum: {
     readonly name: 'name';
     readonly description: 'description';
     readonly rentPrice: 'rentPrice';
+    readonly stripeProductId: 'stripeProductId';
+    readonly stripePriceId: 'stripePriceId';
     readonly userId: 'userId';
     readonly createdAt: 'createdAt';
     readonly updatedAt: 'updatedAt';

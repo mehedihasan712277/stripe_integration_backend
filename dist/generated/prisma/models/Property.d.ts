@@ -23,6 +23,8 @@ export type PropertyMinAggregateOutputType = {
     name: string | null;
     description: string | null;
     rentPrice: number | null;
+    stripeProductId: string | null;
+    stripePriceId: string | null;
     userId: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -32,6 +34,8 @@ export type PropertyMaxAggregateOutputType = {
     name: string | null;
     description: string | null;
     rentPrice: number | null;
+    stripeProductId: string | null;
+    stripePriceId: string | null;
     userId: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -41,6 +45,8 @@ export type PropertyCountAggregateOutputType = {
     name: number;
     description: number;
     rentPrice: number;
+    stripeProductId: number;
+    stripePriceId: number;
     userId: number;
     createdAt: number;
     updatedAt: number;
@@ -57,6 +63,8 @@ export type PropertyMinAggregateInputType = {
     name?: true;
     description?: true;
     rentPrice?: true;
+    stripeProductId?: true;
+    stripePriceId?: true;
     userId?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -66,6 +74,8 @@ export type PropertyMaxAggregateInputType = {
     name?: true;
     description?: true;
     rentPrice?: true;
+    stripeProductId?: true;
+    stripePriceId?: true;
     userId?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -75,6 +85,8 @@ export type PropertyCountAggregateInputType = {
     name?: true;
     description?: true;
     rentPrice?: true;
+    stripeProductId?: true;
+    stripePriceId?: true;
     userId?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -161,6 +173,8 @@ export type PropertyGroupByOutputType = {
     name: string;
     description: string | null;
     rentPrice: number;
+    stripeProductId: string | null;
+    stripePriceId: string | null;
     userId: string;
     createdAt: Date;
     updatedAt: Date;
@@ -181,6 +195,8 @@ export type PropertyWhereInput = {
     name?: Prisma.StringFilter<"Property"> | string;
     description?: Prisma.StringNullableFilter<"Property"> | string | null;
     rentPrice?: Prisma.FloatFilter<"Property"> | number;
+    stripeProductId?: Prisma.StringNullableFilter<"Property"> | string | null;
+    stripePriceId?: Prisma.StringNullableFilter<"Property"> | string | null;
     userId?: Prisma.StringFilter<"Property"> | string;
     createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string;
@@ -191,6 +207,8 @@ export type PropertyOrderByWithRelationInput = {
     name?: Prisma.SortOrder;
     description?: Prisma.SortOrderInput | Prisma.SortOrder;
     rentPrice?: Prisma.SortOrder;
+    stripeProductId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder;
     userId?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -204,6 +222,8 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
     name?: Prisma.StringFilter<"Property"> | string;
     description?: Prisma.StringNullableFilter<"Property"> | string | null;
     rentPrice?: Prisma.FloatFilter<"Property"> | number;
+    stripeProductId?: Prisma.StringNullableFilter<"Property"> | string | null;
+    stripePriceId?: Prisma.StringNullableFilter<"Property"> | string | null;
     userId?: Prisma.StringFilter<"Property"> | string;
     createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string;
@@ -214,6 +234,8 @@ export type PropertyOrderByWithAggregationInput = {
     name?: Prisma.SortOrder;
     description?: Prisma.SortOrderInput | Prisma.SortOrder;
     rentPrice?: Prisma.SortOrder;
+    stripeProductId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder;
     userId?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -231,6 +253,8 @@ export type PropertyScalarWhereWithAggregatesInput = {
     name?: Prisma.StringWithAggregatesFilter<"Property"> | string;
     description?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null;
     rentPrice?: Prisma.FloatWithAggregatesFilter<"Property"> | number;
+    stripeProductId?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null;
+    stripePriceId?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null;
     userId?: Prisma.StringWithAggregatesFilter<"Property"> | string;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string;
     updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string;
@@ -240,6 +264,8 @@ export type PropertyCreateInput = {
     name: string;
     description?: string | null;
     rentPrice: number;
+    stripeProductId?: string | null;
+    stripePriceId?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user: Prisma.UserCreateNestedOneWithoutPropertiesInput;
@@ -249,6 +275,8 @@ export type PropertyUncheckedCreateInput = {
     name: string;
     description?: string | null;
     rentPrice: number;
+    stripeProductId?: string | null;
+    stripePriceId?: string | null;
     userId: string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -258,6 +286,8 @@ export type PropertyUpdateInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     rentPrice?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stripeProductId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     user?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput;
@@ -267,6 +297,8 @@ export type PropertyUncheckedUpdateInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     rentPrice?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stripeProductId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     userId?: Prisma.StringFieldUpdateOperationsInput | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -276,6 +308,8 @@ export type PropertyCreateManyInput = {
     name: string;
     description?: string | null;
     rentPrice: number;
+    stripeProductId?: string | null;
+    stripePriceId?: string | null;
     userId: string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -285,6 +319,8 @@ export type PropertyUpdateManyMutationInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     rentPrice?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stripeProductId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -293,6 +329,8 @@ export type PropertyUncheckedUpdateManyInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     rentPrice?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stripeProductId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     userId?: Prisma.StringFieldUpdateOperationsInput | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -310,6 +348,8 @@ export type PropertyCountOrderByAggregateInput = {
     name?: Prisma.SortOrder;
     description?: Prisma.SortOrder;
     rentPrice?: Prisma.SortOrder;
+    stripeProductId?: Prisma.SortOrder;
+    stripePriceId?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -322,6 +362,8 @@ export type PropertyMaxOrderByAggregateInput = {
     name?: Prisma.SortOrder;
     description?: Prisma.SortOrder;
     rentPrice?: Prisma.SortOrder;
+    stripeProductId?: Prisma.SortOrder;
+    stripePriceId?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -331,6 +373,8 @@ export type PropertyMinOrderByAggregateInput = {
     name?: Prisma.SortOrder;
     description?: Prisma.SortOrder;
     rentPrice?: Prisma.SortOrder;
+    stripeProductId?: Prisma.SortOrder;
+    stripePriceId?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -381,6 +425,8 @@ export type PropertyCreateWithoutUserInput = {
     name: string;
     description?: string | null;
     rentPrice: number;
+    stripeProductId?: string | null;
+    stripePriceId?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
 };
@@ -389,6 +435,8 @@ export type PropertyUncheckedCreateWithoutUserInput = {
     name: string;
     description?: string | null;
     rentPrice: number;
+    stripeProductId?: string | null;
+    stripePriceId?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
 };
@@ -421,6 +469,8 @@ export type PropertyScalarWhereInput = {
     name?: Prisma.StringFilter<"Property"> | string;
     description?: Prisma.StringNullableFilter<"Property"> | string | null;
     rentPrice?: Prisma.FloatFilter<"Property"> | number;
+    stripeProductId?: Prisma.StringNullableFilter<"Property"> | string | null;
+    stripePriceId?: Prisma.StringNullableFilter<"Property"> | string | null;
     userId?: Prisma.StringFilter<"Property"> | string;
     createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string;
@@ -430,6 +480,8 @@ export type PropertyCreateManyUserInput = {
     name: string;
     description?: string | null;
     rentPrice: number;
+    stripeProductId?: string | null;
+    stripePriceId?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
 };
@@ -438,6 +490,8 @@ export type PropertyUpdateWithoutUserInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     rentPrice?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stripeProductId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -446,6 +500,8 @@ export type PropertyUncheckedUpdateWithoutUserInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     rentPrice?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stripeProductId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -454,6 +510,8 @@ export type PropertyUncheckedUpdateManyWithoutUserInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
     description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     rentPrice?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stripeProductId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -462,6 +520,8 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
     name?: boolean;
     description?: boolean;
     rentPrice?: boolean;
+    stripeProductId?: boolean;
+    stripePriceId?: boolean;
     userId?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -472,6 +532,8 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
     name?: boolean;
     description?: boolean;
     rentPrice?: boolean;
+    stripeProductId?: boolean;
+    stripePriceId?: boolean;
     userId?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -482,6 +544,8 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
     name?: boolean;
     description?: boolean;
     rentPrice?: boolean;
+    stripeProductId?: boolean;
+    stripePriceId?: boolean;
     userId?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -492,11 +556,13 @@ export type PropertySelectScalar = {
     name?: boolean;
     description?: boolean;
     rentPrice?: boolean;
+    stripeProductId?: boolean;
+    stripePriceId?: boolean;
     userId?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
 };
-export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "rentPrice" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>;
+export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "rentPrice" | "stripeProductId" | "stripePriceId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>;
 export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 };
@@ -516,6 +582,8 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
         name: string;
         description: string | null;
         rentPrice: number;
+        stripeProductId: string | null;
+        stripePriceId: string | null;
         userId: string;
         createdAt: Date;
         updatedAt: Date;
@@ -878,6 +946,8 @@ export interface PropertyFieldRefs {
     readonly name: Prisma.FieldRef<"Property", 'String'>;
     readonly description: Prisma.FieldRef<"Property", 'String'>;
     readonly rentPrice: Prisma.FieldRef<"Property", 'Float'>;
+    readonly stripeProductId: Prisma.FieldRef<"Property", 'String'>;
+    readonly stripePriceId: Prisma.FieldRef<"Property", 'String'>;
     readonly userId: Prisma.FieldRef<"Property", 'String'>;
     readonly createdAt: Prisma.FieldRef<"Property", 'DateTime'>;
     readonly updatedAt: Prisma.FieldRef<"Property", 'DateTime'>;

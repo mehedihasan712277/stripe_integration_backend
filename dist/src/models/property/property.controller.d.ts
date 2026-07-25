@@ -1,15 +1,8 @@
-import { NextFunction, Request, Response } from "express";
-declare const createProperty: () => (req: Request, res: Response, next: NextFunction) => Promise<void>;
-declare const getAllProperties: () => (req: Request, res: Response, next: NextFunction) => Promise<void>;
-declare const getPropertyById: () => (req: Request, res: Response, next: NextFunction) => Promise<void>;
-declare const updateProperty: () => (req: Request, res: Response, next: NextFunction) => Promise<void>;
-declare const deleteProperty: () => (req: Request, res: Response, next: NextFunction) => Promise<void>;
 export declare const propertyController: {
-    createProperty: typeof createProperty;
-    getAllProperties: typeof getAllProperties;
-    getPropertyById: typeof getPropertyById;
-    updateProperty: typeof updateProperty;
-    deleteProperty: typeof deleteProperty;
+    createProperty: (req: import("express").Request, res: import("express").Response, next: import("express").NextFunction) => Promise<void>;
+    getAllProperties: (req: import("express").Request, res: import("express").Response, next: import("express").NextFunction) => Promise<void>;
+    getPropertyById: (req: import("express").Request, res: import("express").Response, next: import("express").NextFunction) => Promise<void>;
+    updateProperty: (req: import("express").Request, res: import("express").Response, next: import("express").NextFunction) => Promise<void>;
+    deleteProperty: (req: import("express").Request, res: import("express").Response, next: import("express").NextFunction) => Promise<void>;
 };
-export {};
 //# sourceMappingURL=property.controller.d.ts.map

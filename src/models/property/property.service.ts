@@ -16,6 +16,7 @@ const craetePropertyIntoDb = async (
             userId,
         },
     });
+    // console.log("Property created in DB:", property);
 
     // 2. Create a Stripe product representing this property.
     const product = await stripe.products.create({
@@ -23,6 +24,7 @@ const craetePropertyIntoDb = async (
         description: property.description ?? undefined,
     });
 
+    // console.log("Stripe product created:", product);
     // 3. Create a recurring monthly price for that product, based on rent.
     const price = await stripe.prices.create({
         unit_amount: Math.round(property.rentPrice * 100),
@@ -33,6 +35,7 @@ const craetePropertyIntoDb = async (
         product: product.id,
     });
 
+    // console.log("Stripe price created:", price);
     // 4. Persist the Stripe ids back onto the property so a later
     //    subscription checkout can reference property.stripePriceId.
     const updatedProperty = await prisma.property.update({
