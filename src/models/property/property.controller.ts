@@ -3,10 +3,7 @@ import { sendResponse } from "../../utils/sendResponse";
 import { propertyService } from "./property.service";
 
 const createProperty = catchAsync(async (req, res) => {
-    const result = await propertyService.createPropertyIntoDb(
-        req.body,
-        req.user!.id,
-    );
+    const result = await propertyService.createPropertyIntoDb(req.body);
 
     sendResponse(res, {
         success: true,

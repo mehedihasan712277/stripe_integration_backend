@@ -3,17 +3,13 @@ import { prisma } from "../../lib/prisma";
 import { stripe } from "../../lib/stripe";
 import { TCreateProperty, TUpdateProperty } from "./property.interface";
 
-const createPropertyIntoDb = async (
-    payload: TCreateProperty,
-    userId: string,
-) => {
+const createPropertyIntoDb = async (payload: TCreateProperty) => {
     // 1. Save the property in Postgres first.
     const property = await prisma.property.create({
         data: {
             name: payload.name,
             description: payload.description,
             rentPrice: payload.rentPrice,
-            userId,
         },
     });
 
@@ -65,7 +61,6 @@ const createPropertyIntoDb = async (
 
 const getAllPropertiesFromDb = async () => {
     return prisma.property.findMany({
-        include: { user: true },
         orderBy: { createdAt: "desc" },
     });
 };
@@ -73,7 +68,6 @@ const getAllPropertiesFromDb = async () => {
 const getPropertyByIdFromDb = async (id: string) => {
     return prisma.property.findUniqueOrThrow({
         where: { id },
-        include: { user: true },
     });
 };
 

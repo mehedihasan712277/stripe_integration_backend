@@ -41,7 +41,6 @@ model User {
   // Relations
   profile  Profile?
   orders   Order[]
-  properties Property[]
 
   @@map("users")
 }
@@ -116,9 +115,6 @@ model Property {
   // New: links this property to its Stripe subscription product/price
   stripeProductId String?
   stripePriceId   String?
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
