@@ -6,9 +6,9 @@ import { orderServices } from "../order/order.service";
 import { OrderStatus } from "../../../generated/prisma/enums";
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
-    console.log("Received Stripe webhook event:", req.body);
-    console.log("Stripe signature header:", req.headers["stripe-signature"]);
-    console.log(config.stripe_webhook_secret);
+    // console.log("Received Stripe webhook event:", req.body);
+    // console.log("Stripe signature header:", req.headers["stripe-signature"]);
+    // console.log(config.stripe_webhook_secret);
 
     const signature = req.headers["stripe-signature"];
 
