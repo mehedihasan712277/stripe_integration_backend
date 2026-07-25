@@ -111,14 +111,17 @@ model Property {
   id          String   @id @default(cuid())
   name        String
   description String?
-  rentPrice       Float
+  rentPrice   Float
+
+  // New: links this property to its Stripe subscription product/price
+  stripeProductId String?
+  stripePriceId   String?
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
-  
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  
   @@map("properties")
 }

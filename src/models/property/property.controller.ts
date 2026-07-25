@@ -5,7 +5,10 @@ import { propertyService } from "./property.service";
 
 const createProperty = () =>
     catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-        const result = await propertyService.craetePropertyIntoDb(req.body);
+        const result = await propertyService.craetePropertyIntoDb(
+            req.body,
+            req.user!.id,
+        );
         sendResponse(res, {
             success: true,
             statusCode: 201,
