@@ -249,6 +249,7 @@ export declare const ModelName: {
     readonly Product: 'Product';
     readonly Order: 'Order';
     readonly OrderItem: 'OrderItem';
+    readonly Property: 'Property';
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export interface TypeMapCb<GlobalOmitOptions = {}> extends runtime.Types.Utils.Fn<{
@@ -261,7 +262,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         omit: GlobalOmitOptions;
     };
     meta: {
-        modelProps: "user" | "profile" | "product" | "order" | "orderItem";
+        modelProps: "user" | "profile" | "product" | "order" | "orderItem" | "property";
         txIsolationLevel: TransactionIsolationLevel;
     };
     model: {
@@ -635,6 +636,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
                 };
             };
         };
+        Property: {
+            payload: Prisma.$PropertyPayload<ExtArgs>;
+            fields: Prisma.PropertyFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.PropertyFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.PropertyFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>;
+                };
+                findFirst: {
+                    args: Prisma.PropertyFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.PropertyFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>;
+                };
+                findMany: {
+                    args: Prisma.PropertyFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>[];
+                };
+                create: {
+                    args: Prisma.PropertyCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>;
+                };
+                createMany: {
+                    args: Prisma.PropertyCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.PropertyCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>[];
+                };
+                delete: {
+                    args: Prisma.PropertyDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>;
+                };
+                update: {
+                    args: Prisma.PropertyUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.PropertyDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.PropertyUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.PropertyUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>[];
+                };
+                upsert: {
+                    args: Prisma.PropertyUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>;
+                };
+                aggregate: {
+                    args: Prisma.PropertyAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateProperty>;
+                };
+                groupBy: {
+                    args: Prisma.PropertyGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.PropertyGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.PropertyCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.PropertyCountAggregateOutputType> | number;
+                };
+            };
+        };
     };
 } & {
     other: {
@@ -720,6 +795,16 @@ export declare const OrderItemScalarFieldEnum: {
     readonly orderId: 'orderId';
 };
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum];
+export declare const PropertyScalarFieldEnum: {
+    readonly id: 'id';
+    readonly name: 'name';
+    readonly description: 'description';
+    readonly rentPrice: 'rentPrice';
+    readonly userId: 'userId';
+    readonly createdAt: 'createdAt';
+    readonly updatedAt: 'updatedAt';
+};
+export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: 'asc';
     readonly desc: 'desc';
@@ -946,6 +1031,7 @@ export type GlobalOmitConfig = {
     product?: Prisma.ProductOmit;
     order?: Prisma.OrderOmit;
     orderItem?: Prisma.OrderItemOmit;
+    property?: Prisma.PropertyOmit;
 };
 export type LogLevel = 'info' | 'query' | 'warn' | 'error';
 export type LogDefinition = {

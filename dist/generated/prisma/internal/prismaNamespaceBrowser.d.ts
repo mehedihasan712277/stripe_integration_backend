@@ -31,6 +31,7 @@ export declare const ModelName: {
     readonly Product: 'Product';
     readonly Order: 'Order';
     readonly OrderItem: 'OrderItem';
+    readonly Property: 'Property';
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export declare const TransactionIsolationLevel: {
@@ -91,6 +92,16 @@ export declare const OrderItemScalarFieldEnum: {
     readonly orderId: 'orderId';
 };
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum];
+export declare const PropertyScalarFieldEnum: {
+    readonly id: 'id';
+    readonly name: 'name';
+    readonly description: 'description';
+    readonly rentPrice: 'rentPrice';
+    readonly userId: 'userId';
+    readonly createdAt: 'createdAt';
+    readonly updatedAt: 'updatedAt';
+};
+export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: 'asc';
     readonly desc: 'desc';

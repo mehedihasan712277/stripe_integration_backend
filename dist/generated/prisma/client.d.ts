@@ -46,4 +46,9 @@ export type Order = Prisma.OrderModel;
  *
  */
 export type OrderItem = Prisma.OrderItemModel;
+/**
+ * Model Property
+ *
+ */
+export type Property = Prisma.PropertyModel;
 //# sourceMappingURL=client.d.ts.map

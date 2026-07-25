@@ -16,7 +16,7 @@ exports.ActiveStatus = {
 };
 exports.Role = {
     ADMIN: 'ADMIN',
-    MODERATOR: 'MODERATOR'
+    USER: 'USER'
 };
 exports.OrderStatus = {
     UNPAID: 'UNPAID',

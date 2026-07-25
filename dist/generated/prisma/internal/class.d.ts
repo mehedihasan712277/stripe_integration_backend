@@ -172,6 +172,17 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     get orderItem(): Prisma.OrderItemDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
+    /**
+     * `prisma.property`: Exposes CRUD operations for the **Property** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Properties
+      * const properties = await prisma.property.findMany()
+      * ```
+      */
+    get property(): Prisma.PropertyDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
 }
 export declare function getPrismaClientClass(): PrismaClientConstructor;
 //# sourceMappingURL=class.d.ts.map

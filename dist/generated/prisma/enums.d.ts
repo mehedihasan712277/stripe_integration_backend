@@ -5,7 +5,7 @@ export declare const ActiveStatus: {
 export type ActiveStatus = (typeof ActiveStatus)[keyof typeof ActiveStatus];
 export declare const Role: {
     readonly ADMIN: 'ADMIN';
-    readonly MODERATOR: 'MODERATOR';
+    readonly USER: 'USER';
 };
 export type Role = (typeof Role)[keyof typeof Role];
 export declare const OrderStatus: {

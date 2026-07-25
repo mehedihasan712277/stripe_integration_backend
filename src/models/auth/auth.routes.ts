@@ -11,16 +11,8 @@ router.post("/refresh-token", authController.refreshToken);
 
 router.post("/register", authController.registerUser);
 
-router.get(
-    "/me",
-    auth(Role.ADMIN, Role.MODERATOR, Role.ADMIN),
-    authController.getMyProfile,
-);
+router.get("/me", auth(Role.ADMIN, Role.USER), authController.getMyProfile);
 
-router.post(
-    "/logout",
-    auth(Role.ADMIN, Role.ADMIN, Role.MODERATOR),
-    authController.logoutUser,
-);
+router.post("/logout", auth(Role.ADMIN, Role.USER), authController.logoutUser);
 
 export const authRoutes = router;

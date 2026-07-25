@@ -13,6 +13,7 @@ const auth_routes_1 = require("./models/auth/auth.routes");
 const order_routes_1 = require("./models/order/order.routes");
 const checkout_routes_1 = require("./models/checkout/checkout.routes");
 const webhook_routes_1 = require("./models/checkout/webhook.routes");
+const property_routes_1 = require("./models/property/property.routes");
 // -----------routes import---------
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
@@ -175,6 +176,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", auth_routes_1.authRoutes);
 app.use("/api/checkout", checkout_routes_1.checkoutRoutes);
 app.use("/api/orders", order_routes_1.orderRoutes);
+app.use("/api/properties", property_routes_1.propertyRoutes);
 app.use(notfound_1.notFound);
 app.use(globalErrorHandler_1.globalErrorHandler);
 exports.default = app;
