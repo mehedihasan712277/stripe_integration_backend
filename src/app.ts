@@ -10,6 +10,7 @@ import { orderRoutes } from "./models/order/order.routes";
 import { checkoutRoutes } from "./models/checkout/checkout.routes";
 import { webhookRoutes } from "./models/checkout/webhook.routes";
 import { propertyRoutes } from "./models/property/property.routes";
+import { rentalRequestRoutes } from "./models/rentalRequest/rentalRequest.routes";
 
 // -----------routes import---------
 
@@ -182,6 +183,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/checkout", checkoutRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/properties", propertyRoutes);
+app.use("/api/rental-requests", rentalRequestRoutes);
 
 app.use(notFound);
 app.use(globalErrorHandler);

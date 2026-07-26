@@ -10,6 +10,12 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+enum RentalRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+}
 
 enum ActiveStatus {
   ACTIVE
@@ -41,7 +47,8 @@ model User {
   // Relations
   profile  Profile?
   orders   Order[]
-
+  rentalRequests RentalRequest[]
+  
   @@map("users")
 }
 
@@ -115,9 +122,38 @@ model Property {
   // New: links this property to its Stripe subscription product/price
   stripeProductId String?
   stripePriceId   String?
-
+  rentalRequests RentalRequest[]
+  
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@map("properties")
 }
+
+
+model RentalRequest {
+  id     String               @id @default(cuid())
+  status RentalRequestStatus  @default(PENDING)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Set once the user starts the subscription checkout
+  stripeSessionId String? @unique
+  // Set once the webhook confirms payment
+  stripeSubscriptionId String? @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("rental_requests")
+}
+
+// --- add this relation field to your existing User model ---
+// rentalRequests RentalRequest[]
+
+// --- add this relation field to your existing Property model ---
+// rentalRequests RentalRequest[]

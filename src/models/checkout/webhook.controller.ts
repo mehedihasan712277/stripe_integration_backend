@@ -3,13 +3,10 @@ import Stripe from "stripe";
 import config from "../../config";
 import { stripe } from "../../lib/stripe";
 import { orderServices } from "../order/order.service";
+import { rentalRequestServices } from "../rentalRequest/rentalRequest.service";
 import { OrderStatus } from "../../../generated/prisma/enums";
 
 const handleStripeWebhook = async (req: Request, res: Response) => {
-    // console.log("Received Stripe webhook event:", req.body);
-    // console.log("Stripe signature header:", req.headers["stripe-signature"]);
-    // console.log(config.stripe_webhook_secret);
-
     const signature = req.headers["stripe-signature"];
 
     if (!signature) {
@@ -37,13 +34,27 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
         case "checkout.session.completed": {
             const session = event.data.object as Stripe.Checkout.Session;
             const orderId = session.metadata?.orderId;
+            const rentalRequestId = session.metadata?.rentalRequestId;
 
-            if (orderId) {
+            if (rentalRequestId) {
+                // Subscription checkout created by the rental flow.
+                const subscriptionId =
+                    typeof session.subscription === "string"
+                        ? session.subscription
+                        : session.subscription?.id;
+
+                await rentalRequestServices.completeRentalRequestById(
+                    rentalRequestId,
+                    subscriptionId as string,
+                );
+            } else if (orderId) {
+                // One-time payment created by the order/checkout flow.
                 await orderServices.updateOrderStatusById(
                     orderId,
                     OrderStatus.PAID,
                 );
             } else {
+                // Fallback for sessions created before metadata existed.
                 await orderServices.updateOrderStatusBySessionId(
                     session.id,
                     OrderStatus.PAID,
@@ -55,6 +66,13 @@ const handleStripeWebhook = async (req: Request, res: Response) => {
         case "checkout.session.expired": {
             const session = event.data.object as Stripe.Checkout.Session;
             const orderId = session.metadata?.orderId;
+            const rentalRequestId = session.metadata?.rentalRequestId;
+
+            if (rentalRequestId) {
+                // Nothing to do - the rental request just stays APPROVED,
+                // so the user can hit /subscribe again to retry payment.
+                break;
+            }
 
             if (orderId) {
                 await orderServices.updateOrderStatusById(
